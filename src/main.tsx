@@ -1,35 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import { BrowserRouter, PathRouteProps, Route, Routes } from 'react-router-dom'
-import Home from './pages/Home/Home.tsx'
-import About from './pages/About/About.tsx'
-import NotFound from './pages/NotFound/NotFound.tsx'
-import LangProvider from './app/Providers/LangProvider.tsx'
-
-
-
-const RoutesInitial: PathRouteProps[] = [
-  {path: '/', element: <App/>},
-  {path: '/home', element: <Home/>},
-  {path: '/about', element: <About/>},
-  {path: '*', element: <NotFound/>}
-]
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import AuthProvider from './app/Providers/AuthProvider.tsx';
+import LangProvider from './app/Providers/LangProvider.tsx';
+import RoutesCustom from './app/routes/RoutesCustom.tsx';
+import './index.css';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <BrowserRouter>
-    
-    <Routes>
-      <LangProvider>
-        {RoutesInitial.map((item) => (
-          <Route path={item.path} element={item.element}/>
-        ))}
-      </LangProvider>
-    </Routes>
+    <React.StrictMode>
+        <BrowserRouter>
+            <AuthProvider>
+                <LangProvider>
+                    {/* <Routes> */}
+                    <RoutesCustom />
 
-    </BrowserRouter>
-    
-  </React.StrictMode>,
-)
+                    {/* </Routes> */}
+                </LangProvider>
+            </AuthProvider>
+        </BrowserRouter>
+    </React.StrictMode>,
+);

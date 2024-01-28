@@ -6,15 +6,5 @@
     "semi": true,
     "printWidth": 80,
     "jsxSingleQuote": true,
-    "endOfLine": "auto",
-    "plugins": ["@trivago/prettier-plugin-sort-imports"],
-    "importOrder": [
-        "^@src/(.*)$",
-        "^@app/(.*)$",
-        "^@shared/(.*)$",
-        "^@assets/(.*)$",
-        "^[./]"
-    ],
-    "importOrderSortSpecifiers": true,
-    "importOrderCaseInsensitive": true
+    "endOfLine": "auto"
 }
