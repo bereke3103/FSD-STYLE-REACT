@@ -1,22 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import AuthProvider from './app/Providers/AuthProvider.tsx';
-import LangProvider from './app/Providers/LangProvider.tsx';
 import RoutesCustom from './app/routes/RoutesCustom.tsx';
 import './index.css';
-import { BrowserRouter } from 'react-router-dom';
+import AuthProvider from './shared/Providers/AuthProvider.tsx';
+import LanguageProvider from './shared/Providers/LanguageProvider.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <BrowserRouter>
-            <AuthProvider>
-                <LangProvider>
-                    {/* <Routes> */}
-                    <RoutesCustom />
+        {/* <BrowserRouter> */}
+        <AuthProvider>
+            <LanguageProvider>
+                {/* <Routes> */}
+                <RoutesCustom />
 
-                    {/* </Routes> */}
-                </LangProvider>
-            </AuthProvider>
-        </BrowserRouter>
+                {/* </Routes> */}
+            </LanguageProvider>
+        </AuthProvider>
+        {/* </BrowserRouter> */}
     </React.StrictMode>,
 );

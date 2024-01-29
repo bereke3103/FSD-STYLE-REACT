@@ -1,8 +1,11 @@
+import PrivateMainLayout from '../../shared/components/MainLayout/PrivateMainLayout';
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+    return (
+        <PrivateMainLayout>
+            <div>Home</div>
+        </PrivateMainLayout>
+    );
+};
 
-export default Home
+export default Home;

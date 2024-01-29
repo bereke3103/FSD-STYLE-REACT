@@ -1,4 +1,4 @@
-import { IndexRouteProps } from 'react-router-dom';
+import { IndexRouteObject, NonIndexRouteObject } from 'react-router-dom';
 
 export type AllRoles =
     | 'operator'
@@ -12,6 +12,15 @@ export type AllRoles =
     | 'oskoperator'
     | 'press';
 
-export interface ExtendedIndexRouteObject extends IndexRouteProps {
+interface ExtendedIndexRouteObject extends IndexRouteObject {
     access?: AllRoles[];
+    children?: undefined;
 }
+export interface ExtendedNonIndexRouteObject extends NonIndexRouteObject {
+    access?: AllRoles[];
+    children?: ExtendedNonIndexRouteObject[];
+}
+
+export type ExtendedRouteObject =
+    | ExtendedIndexRouteObject
+    | ExtendedNonIndexRouteObject;

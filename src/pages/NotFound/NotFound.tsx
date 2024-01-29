@@ -1,8 +1,11 @@
+import PrivateMainLayout from '../../shared/components/MainLayout/PrivateMainLayout';
 
 const NotFound = () => {
-  return (
-    <div>NotFound</div>
-  )
-}
+    return (
+        <PrivateMainLayout>
+            <div>NotFound</div>
+        </PrivateMainLayout>
+    );
+};
 
-export default NotFound
+export default NotFound;
