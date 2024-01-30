@@ -5,8 +5,10 @@ import {
     LanguageContext,
     LanguageType,
 } from '../../Providers/LanguageProvider';
+import { useTranslation } from 'react-i18next';
 
 const PrivateMainLayout = ({ children }: { children: React.ReactNode }) => {
+    const { i18n } = useTranslation();
     const { logout } = useContext(AuthCtx);
     const { updateLanguage: updateLang } = useContext(LanguageContext);
     const navigate = useNavigate();
@@ -19,7 +21,7 @@ const PrivateMainLayout = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         updateLang(selectedOption);
         navigate(pathname.replace(`${lng}`, selectedOption));
-    }, [selectedOption]);
+    }, [lng, navigate, pathname, selectedOption, updateLang]);
 
     return (
         <>
@@ -37,6 +39,7 @@ const PrivateMainLayout = ({ children }: { children: React.ReactNode }) => {
                         value={selectedOption}
                         onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                             setSelectedOption(e.target.value as LanguageType);
+                            i18n.changeLanguage(e.target.value);
                         }}
                     >
                         <option

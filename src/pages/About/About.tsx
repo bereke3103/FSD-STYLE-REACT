@@ -1,9 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import PrivateMainLayout from '../../shared/components/MainLayout/PrivateMainLayout';
 
 const About = () => {
+    const { t } = useTranslation();
     return (
         <PrivateMainLayout>
-            <div>About</div>
+            <div>{t('about')}</div>
         </PrivateMainLayout>
     );
 };

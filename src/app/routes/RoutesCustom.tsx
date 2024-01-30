@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import {
     Navigate,
     RouterProvider,
@@ -10,7 +10,12 @@ import NotFound from '../../pages/NotFound/NotFound';
 import { AuthCtx } from '../../shared/Providers/AuthProvider';
 import Login from '../../shared/components/PublicRoutes/Login';
 import Register from '../../shared/components/PublicRoutes/Register';
-import { AllRoles, ExtendedRouteObject } from '../../shared/types';
+import {
+    AllRoles,
+    ExtendedNonIndexRouteObject,
+    ExtendedRouteObject,
+} from '../../shared/types';
+import { useTranslation } from 'react-i18next';
 
 export const publicRoutes: ExtendedRouteObject[] = [
     {
@@ -42,23 +47,28 @@ export const publicRoutes: ExtendedRouteObject[] = [
 
 export const privateRoutes: ExtendedRouteObject[] = [
     {
+        access: ['analytic', 'admin'],
         element: <Navigate to={'kk/'} />,
         path: '/',
     },
     {
+        access: ['analytic', 'admin'],
         path: ':lng/*',
         element: <Navigate to='home' />,
     },
     {
+        access: ['admin'],
         path: ':lng/',
         element: <Navigate to='about' />,
     },
     {
+        access: ['analytic', 'admin'],
         path: ':lng/',
         element: <Navigate to='notfound' />,
     },
     {
         path: ':lng/',
+        access: ['analytic', 'admin'],
         children: [
             {
                 access: ['analytic', 'admin'],
@@ -71,7 +81,7 @@ export const privateRoutes: ExtendedRouteObject[] = [
                 path: 'about',
             },
             {
-                access: ['admin'],
+                access: ['admin', 'analytic'],
                 element: <NotFound />,
                 path: 'notfound',
             },
@@ -79,28 +89,62 @@ export const privateRoutes: ExtendedRouteObject[] = [
     },
 ];
 
-const privateAccessRoles = (
+const useAvailableRoutes = (
     privateRoutes: ExtendedRouteObject[],
-    role: AllRoles,
+    accessGroups: AllRoles[],
 ) => {
-    const routesAccess = privateRoutes.forEach((route) => {
-        if (route.access?.includes(role)) {
-            return route;
-        }
-    });
-    console.log('routesAccessroutesAccess:', routesAccess);
+    const checkAccess = useCallback(
+        (routes: ExtendedRouteObject[], accessValue: AllRoles[]) => {
+            const result: ExtendedRouteObject[] = [];
+
+            routes.forEach((route) => {
+                if (
+                    route.access?.length &&
+                    route.access.some((acc) => accessValue.includes(acc))
+                ) {
+                    const newRoute: ExtendedRouteObject = { ...route };
+
+                    if (route.children?.length) {
+                        newRoute.children = checkAccess(
+                            route.children,
+                            accessValue,
+                        ) as ExtendedNonIndexRouteObject[] | undefined;
+                    }
+                    result.push(newRoute);
+                }
+            });
+
+            return result;
+        },
+        [],
+    );
+
+    const availableRoutes = useMemo(() => {
+        return checkAccess(privateRoutes, accessGroups);
+    }, [accessGroups, checkAccess, privateRoutes]);
+
+    return { availableRoutes };
 };
 
 const RoutesCustom = () => {
+    const accessGroups: AllRoles[] = ['analytic'];
+
     const { isAuth, role } = useContext(AuthCtx);
+    const { t } = useTranslation();
     const tokenLc = localStorage.getItem('token');
-    console.log('rolerolerole:', role);
-    const privateAccessRolesRRoutes = privateAccessRoles(privateRoutes, role);
+
+
+    console.log("privateRoutes:", privateRoutes)
+    const { availableRoutes } = useAvailableRoutes(privateRoutes, accessGroups);
+
+    console.log('availableRoutes:', availableRoutes);
+
     return (
         <>
+            <h1>{t('about')}</h1>
             <RouterProvider
                 router={createBrowserRouter(
-                    isAuth && tokenLc ? privateRoutes : publicRoutes,
+                    isAuth && tokenLc ? availableRoutes : publicRoutes,
                 )}
             />
         </>
