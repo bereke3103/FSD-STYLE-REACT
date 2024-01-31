@@ -1,4 +1,4 @@
-import PrivateMainLayout from '../../shared/components/MainLayout/PrivateMainLayout';
+import PrivateMainLayout from '../../../shared/components/MainLayout/PrivateMainLayout';
 
 const Home = () => {
     return (

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import PrivateMainLayout from '../../shared/components/MainLayout/PrivateMainLayout';
+import PrivateMainLayout from '../../../shared/components/MainLayout/PrivateMainLayout';
 
 const About = () => {
     const { t } = useTranslation();

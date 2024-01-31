@@ -4,9 +4,9 @@ import {
     RouterProvider,
     createBrowserRouter,
 } from 'react-router-dom';
-import About from '../../pages/About/About';
-import Home from '../../pages/Home/Home';
-import NotFound from '../../pages/NotFound/NotFound';
+import About from '../../pages/Draft/About/About';
+import Home from '../../pages/Draft/Home/Home';
+import NotFound from '../../pages/Draft/NotFound/NotFound';
 import { AuthCtx } from '../../shared/Providers/AuthProvider';
 import Login from '../../shared/components/PublicRoutes/Login';
 import Register from '../../shared/components/PublicRoutes/Register';
