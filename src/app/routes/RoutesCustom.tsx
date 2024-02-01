@@ -16,6 +16,24 @@ import {
     ExtendedRouteObject,
 } from '../../shared/types';
 import { useTranslation } from 'react-i18next';
+import Admin from '../../pages/Admin/Admin';
+import AdminItem from '../../pages/Admin/AdminItem';
+import Agency from '../../pages/agency/Agency';
+import AgencyItem from '../../pages/agency/AgencyItem';
+import Appeal from '../../pages/appeal/Appeal';
+import AppealItem from '../../pages/appeal/AppealItem';
+import Incident from '../../pages/incident/Incident';
+import IncidentItem from '../../pages/incident/IncidentItem';
+import Initiator from '../../pages/initiator/Initiator';
+import InitiatorItem from '../../pages/initiator/InitiatorItem';
+import Organization from '../../pages/organization/Organization';
+import OrganizationItem from '../../pages/organization/OrganizationItem';
+import Postal from '../../pages/postal/Postal';
+import PostalItem from '../../pages/postal/PostalItem';
+import Problem from '../../pages/problem/Problem';
+import ProblemItem from '../../pages/problem/ProblemItem';
+import AppealReport from '../../pages/AppealReport';
+import Article from '../../pages/Article';
 
 export const publicRoutes: ExtendedRouteObject[] = [
     {
@@ -67,6 +85,56 @@ export const privateRoutes: ExtendedRouteObject[] = [
         element: <Navigate to='notfound' />,
     },
     {
+        access: ['analytic', 'admin'],
+        path: ':lng/',
+        element: <Navigate to='admin' />,
+    },
+    {
+        access: ['analytic', 'admin'],
+        path: ':lng/',
+        element: <Navigate to='agency' />,
+    },
+    {
+        access: ['analytic', 'admin'],
+        path: ':lng/',
+        element: <Navigate to='appeal' />,
+    },
+    {
+        access: ['analytic', 'admin'],
+        path: ':lng/',
+        element: <Navigate to='incident' />,
+    },
+    {
+        access: ['analytic', 'admin'],
+        path: ':lng/',
+        element: <Navigate to='initiator' />,
+    },
+    {
+        access: ['analytic', 'admin'],
+        path: ':lng/',
+        element: <Navigate to='organization' />,
+    },
+    {
+        access: ['analytic', 'admin'],
+        path: ':lng/',
+        element: <Navigate to='postal' />,
+    },
+    {
+        access: ['analytic', 'admin'],
+        path: ':lng/',
+        element: <Navigate to='problem' />,
+    },
+    {
+        access: ['analytic', 'admin'],
+        path: ':lng/',
+        element: <Navigate to='appealreport' />,
+    },
+    {
+        access: ['analytic', 'admin'],
+        path: ':lng/',
+        element: <Navigate to='article' />,
+    },
+    {
         path: ':lng/',
         access: ['analytic', 'admin'],
         children: [
@@ -84,6 +152,96 @@ export const privateRoutes: ExtendedRouteObject[] = [
                 access: ['admin', 'analytic'],
                 element: <NotFound />,
                 path: 'notfound',
+            },
+            {
+                path: 'admin',
+                access: ['analytic', 'admin'],
+                element: <Admin />,
+            },
+            {
+                path: 'admin/:id',
+                access: ['analytic', 'admin'],
+                element: <AdminItem />,
+            },
+            {
+                path: 'agency',
+                access: ['analytic', 'admin'],
+                element: <Agency />,
+            },
+            {
+                path: 'agency/:id',
+                access: ['analytic', 'admin'],
+                element: <AgencyItem />,
+            },
+            {
+                path: 'appeal',
+                access: ['analytic', 'admin'],
+                element: <Appeal />,
+            },
+            {
+                path: 'appeal/:id',
+                access: ['analytic', 'admin'],
+                element: <AppealItem />,
+            },
+            {
+                path: 'incident',
+                access: ['analytic', 'admin'],
+                element: <Incident />,
+            },
+            {
+                path: 'incident/:id',
+                access: ['analytic', 'admin'],
+                element: <IncidentItem />,
+            },
+            {
+                path: 'initiator',
+                access: ['analytic', 'admin'],
+                element: <Initiator />,
+            },
+            {
+                path: 'initiator/:id',
+                access: ['analytic', 'admin'],
+                element: <InitiatorItem />,
+            },
+            {
+                path: 'organization',
+                access: ['analytic', 'admin'],
+                element: <Organization />,
+            },
+            {
+                path: 'organization/:id',
+                access: ['analytic', 'admin'],
+                element: <OrganizationItem />,
+            },
+            {
+                path: 'postal',
+                access: ['analytic', 'admin'],
+                element: <Postal />,
+            },
+            {
+                path: 'postal/:id',
+                access: ['analytic', 'admin'],
+                element: <PostalItem />,
+            },
+            {
+                path: 'problem',
+                access: ['analytic', 'admin'],
+                element: <Problem />,
+            },
+            {
+                path: 'problem/:id',
+                access: ['analytic', 'admin'],
+                element: <ProblemItem />,
+            },
+            {
+                path: 'appealreport',
+                access: ['analytic', 'admin'],
+                element: <AppealReport />,
+            },
+            {
+                path: 'article',
+                access: ['analytic', 'admin'],
+                element: <Article />,
             },
         ],
     },
@@ -133,8 +291,7 @@ const RoutesCustom = () => {
     const { t } = useTranslation();
     const tokenLc = localStorage.getItem('token');
 
-
-    console.log("privateRoutes:", privateRoutes)
+    console.log('privateRoutes:', privateRoutes);
     const { availableRoutes } = useAvailableRoutes(privateRoutes, accessGroups);
 
     console.log('availableRoutes:', availableRoutes);
@@ -144,7 +301,7 @@ const RoutesCustom = () => {
             <h1>{t('about')}</h1>
             <RouterProvider
                 router={createBrowserRouter(
-                    isAuth && tokenLc ? availableRoutes : publicRoutes,
+                    isAuth && tokenLc ? privateRoutes : publicRoutes,
                 )}
             />
         </>
