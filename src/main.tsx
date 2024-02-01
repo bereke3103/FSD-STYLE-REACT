@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import RoutesCustom from './app/routes/RoutesCustom.tsx';
-import './index.css';
-import AuthProvider from './shared/Providers/AuthProvider.tsx';
-import LanguageProvider from './shared/Providers/LanguageProvider.tsx';
 import { I18nextProvider } from 'react-i18next';
 import { i18Instance } from './app/config/i18n.ts';
+import AuthProvider from './shared/Providers/AuthProvider.tsx';
+import LanguageProvider from './shared/Providers/LanguageProvider.tsx';
+import './app/styles/index.scss';
 // import './app/config/i18n.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

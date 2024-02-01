@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 13px;
+    background: #282828;
+    color: #fcfcfc;
+
+    &-logo {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 50px;
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+    }
+
+    &-settings {
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+        align-items: center;
+
+        .user-setting {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 15px;
+        }
+    }
+}

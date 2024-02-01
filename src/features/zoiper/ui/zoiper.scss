@@ -1,0 +1,15 @@
+.zoiper {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+
+    button {
+        cursor: pointer;
+        padding: 8px;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        background: #04a3d9;
+    }
+}

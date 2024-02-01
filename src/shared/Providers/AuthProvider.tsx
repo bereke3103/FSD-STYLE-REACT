@@ -16,7 +16,7 @@ export const AuthCtx = createContext<{
 });
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [isAuth, setIsAuth] = useState(false);
+    const [isAuth, setIsAuth] = useState(true);
     const [loading, setLoading] = useState(false);
     const [role, setRole] = useState<AllRoles>('analytic');
 

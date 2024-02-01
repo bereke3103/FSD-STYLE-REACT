@@ -34,6 +34,7 @@ import Problem from '../../pages/problem/Problem';
 import ProblemItem from '../../pages/problem/ProblemItem';
 import AppealReport from '../../pages/AppealReport';
 import Article from '../../pages/Article';
+import Profile from '../../pages/Profile';
 
 export const publicRoutes: ExtendedRouteObject[] = [
     {
@@ -133,6 +134,11 @@ export const privateRoutes: ExtendedRouteObject[] = [
         access: ['analytic', 'admin'],
         path: ':lng/',
         element: <Navigate to='article' />,
+    },
+    {
+        access: ['analytic', 'admin'],
+        path: ':lng/',
+        element: <Navigate to='profile' />,
     },
     {
         path: ':lng/',
@@ -243,6 +249,11 @@ export const privateRoutes: ExtendedRouteObject[] = [
                 access: ['analytic', 'admin'],
                 element: <Article />,
             },
+            {
+                path: 'profile',
+                access: ['analytic', 'admin'],
+                element: <Profile />,
+            },
         ],
     },
 ];
@@ -298,7 +309,6 @@ const RoutesCustom = () => {
 
     return (
         <>
-            <h1>{t('about')}</h1>
             <RouterProvider
                 router={createBrowserRouter(
                     isAuth && tokenLc ? privateRoutes : publicRoutes,

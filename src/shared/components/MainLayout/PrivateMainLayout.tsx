@@ -1,76 +1,27 @@
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useContext } from 'react';
 import { AuthCtx } from '../../Providers/AuthProvider';
-import {
-    LanguageContext,
-    LanguageType,
-} from '../../Providers/LanguageProvider';
-import { useTranslation } from 'react-i18next';
-
+import ChangeLanguage from '../changeLanguage/ChangeLanguage';
+import LinkCustoms from '../linkCustoms/LinkCustoms';
+import logo from '../../../assets/logo.svg';
+import { LogoutOutlined, PhoneOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Select } from 'antd';
+import { Header } from '../../../widgets/header';
 const PrivateMainLayout = ({ children }: { children: React.ReactNode }) => {
-    const { i18n } = useTranslation();
     const { logout } = useContext(AuthCtx);
-    const { updateLanguage: updateLang } = useContext(LanguageContext);
-    const navigate = useNavigate();
-    const { pathname } = useLocation();
-
-    const { lng } = useParams();
-
-    const [selectedOption, setSelectedOption] = useState<LanguageType>('kk');
-
-    useEffect(() => {
-        updateLang(selectedOption);
-        navigate(pathname.replace(`${lng}`, selectedOption));
-    }, [lng, navigate, pathname, selectedOption, updateLang]);
 
     return (
         <>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>
-                <Link to={'/kk/home'}>Home</Link>
-                <Link to={'/kk/about'}>About</Link>
-                <Link to={'/kk/notfound'}>Not Foundа</Link>
+            <Header />
+            {/* <div style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>
+                <LinkCustoms />
+
                 <button onClick={() => logout()}>Logout</button>
                 <div>
-                    <select
-                        style={{
-                            fontSize: '30px',
-                        }}
-                        id='selectOption'
-                        value={selectedOption}
-                        onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                            setSelectedOption(e.target.value as LanguageType);
-                            i18n.changeLanguage(e.target.value);
-                        }}
-                    >
-                        <option
-                            style={{
-                                fontSize: '30px',
-                            }}
-                            value='kk'
-                        >
-                            KAZ
-                        </option>
-                        <option
-                            style={{
-                                fontSize: '30px',
-                            }}
-                            value='ru'
-                        >
-                            RU
-                        </option>
-                        <option
-                            style={{
-                                fontSize: '30px',
-                            }}
-                            value='en'
-                        >
-                            EN
-                        </option>
-                    </select>
+                    <ChangeLanguage />
                 </div>
             </div>
             {children}
-            <footer>Footer</footer>
+            <footer>Footer</footer> */}
         </>
     );
 };
